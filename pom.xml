@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <properties>
-        <java.version>21</java.version>
+        <java.version>17</java.version>
         <hapi.fhir.jpa.server.starter.revision>1</hapi.fhir.jpa.server.starter.revision>
         <clinical-reasoning.version>3.19.0</clinical-reasoning.version>
     </properties>
