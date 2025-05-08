@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <properties>
-        <java.version>17</java.version>
+        <java.version>21</java.version>
         <hapi.fhir.jpa.server.starter.revision>1</hapi.fhir.jpa.server.starter.revision>
         <clinical-reasoning.version>3.19.0</clinical-reasoning.version>
     </properties>
@@ -28,7 +28,7 @@
     <packaging>war</packaging>
 
     <prerequisites>
-        <maven>3.8.3</maven>
+        <maven>3.4.4</maven>
     </prerequisites>
 
     <name>HAPI FHIR JPA Server - Starter Project</name>
@@ -502,76 +502,6 @@
                 <configuration>
                     <failBuildInCaseOfConflict>false</failBuildInCaseOfConflict>
                     <checkTestClasspath>false</checkTestClasspath>
-                    <!--
-                    <printEqualFiles>false</printEqualFiles>
-                    <failBuildInCaseOfDifferentContentConflict>true</failBuildInCaseOfDifferentContentConflict>
-                    <failBuildInCaseOfEqualContentConflict>true</failBuildInCaseOfEqualContentConflict>
-                    <failBuildInCaseOfConflict>true</failBuildInCaseOfConflict>
-                    <checkCompileClasspath>true</checkCompileClasspath>
-                    <checkRuntimeClasspath>false</checkRuntimeClasspath>
-                    <skip>false</skip>
-                    <quiet>false</quiet>
-                    <preferLocal>true</preferLocal>
-                    <useResultFile>true</useResultFile>
-                    <resultFileMinClasspathCount>2</resultFileMinClasspathCount>
-                    <resultFile>${project.build.directory}/duplicate-finder-result.xml</resultFile>
-                    -->
-                    <!--
-                    <ignoredDependencies>
-                        <dependency>
-                            <groupId>javax.el</groupId>
-                            <artifactId>javax.el-api</artifactId>
-                        </dependency>
-                        <dependency>
-                            <groupId>javax.mail</groupId>
-                            <artifactId>javax.mail-api</artifactId>
-                        </dependency>
-                        <dependency>
-                            <groupId>javax.activation</groupId>
-                            <artifactId>javax.activation-api</artifactId>
-                        </dependency>
-                        <dependency>
-                            <groupId>com.helger</groupId>
-                            <artifactId>ph-schematron</artifactId>
-                        </dependency>
-                        <dependency>
-                            <groupId>commons-logging</groupId>
-                            <artifactId>commons-logging</artifactId>
-                        </dependency>
-                        <dependency>
-                            <groupId>org.jscience</groupId>
-                            <artifactId>jscience</artifactId>
-                        </dependency>
-                        <dependency>
-                            <groupId>org.springframework</groupId>
-                            <artifactId>spring-jcl</artifactId>
-                        </dependency>
-                        <dependency>
-                            <groupId>org.springframework</groupId>
-                            <artifactId>spring-jcl</artifactId>
-                        </dependency>
-                        <dependency>
-                            <groupId>com.google.code.findbugs</groupId>
-                            <artifactId>annotations</artifactId>
-                        </dependency>
-                        <dependency>
-                            <groupId>org.apache.derby</groupId>
-                            <artifactId>derbyclient</artifactId>
-                        </dependency>
-                        <dependency>
-                            <groupId>org.apache.derby</groupId>
-                            <artifactId>derbynet</artifactId>
-                        </dependency>
-                        <dependency>
-                            <groupId>org.apache.derby</groupId>
-                            <artifactId>derbyclient</artifactId>
-                        </dependency>
-                        <dependency>
-                            <groupId>org.checkerframework</groupId>
-                            <artifactId>checker-compat-qual</artifactId>
-                        </dependency>
-                    </ignoredDependencies>
-                    -->
                     <ignoredResourcePatterns>
                         <ignoredResourcePattern>.*\.txt$</ignoredResourcePattern>
                         <ignoredResourcePattern>.*\.html$</ignoredResourcePattern>
@@ -609,109 +539,5 @@
                 </dependency>
             </dependencies>
         </profile>
-        <!--                                                              -->
-        <!-- Examples of how to run the server:                           -->
-        <!--                                                              -->
-        <!-- For Spring Boot use:                                         -->
-        <!-- mvn spring-boot:run                                          -->
-        <!--                                                              -->
-        <!-- For JETTY use:                                               -->
-        <!-- mvn -Pjetty spring-boot:run                                  -->
-        <!--                                                              -->
-        <!-- For the Tomcat WAR approach use:                             -->
-        <!-- mvn clean package -DskipTests && java -jar ./target/ROOT.war -->
-        <!--                                                              -->
-        <!-- NEXT: Browse to http://localhost:8080/fhir                   -->
-        <!--                                                              -->
-        <profile>
-            <id>jetty</id>
-            <dependencies>
-                <dependency>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-web</artifactId>
-                    <version>${spring_boot_version}</version>
-                    <exclusions>
-                        <exclusion>
-                            <groupId>org.springframework.boot</groupId>
-                            <artifactId>spring-boot-starter-tomcat</artifactId>
-                        </exclusion>
-                    </exclusions>
-                </dependency>
-                <dependency>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-jetty</artifactId>
-                    <version>${spring_boot_version}</version>
-                </dependency>
-            </dependencies>
-        </profile>
-        <profile>
-            <id>ossrh-repo</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-                <property>
-                    <name>deployToSonatype</name>
-                </property>
-            </activation>
-            <distributionManagement>
-                <snapshotRepository>
-                    <id>ossrh</id>
-                    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-                </snapshotRepository>
-                <repository>
-                    <id>ossrh</id>
-                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-                </repository>
-            </distributionManagement>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.sonatype.plugins</groupId>
-                        <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.6.13</version>
-                        <extensions>true</extensions>
-                        <configuration>
-                            <serverId>ossrh</serverId>
-                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.6</version>
-                        <executions>
-                            <execution>
-                                <id>sign-artifacts</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                                <configuration>
-                                    <keyname>${gpg.keyname}</keyname>
-                                    <passphraseServerId>${gpg.keyname}</passphraseServerId>
-                                    <gpgArguments>
-                                        <arg>--pinentry-mode</arg>
-                                        <arg>loopback</arg>
-                                    </gpgArguments>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <!-- For connecting to GCP CloudSQL Postgres instances:
-        https://github.com/GoogleCloudPlatform/cloud-sql-jdbc-socket-factory/blob/main/docs/jdbc.md#postgres-1
-        Needs 'boot' profile as well. -->
-        <profile>
-            <id>cloudsql-postgres</id>
-            <dependencies>
-                <dependency>
-                    <groupId>com.google.cloud.sql</groupId>
-                    <artifactId>postgres-socket-factory</artifactId>
-                    <version>1.17.0</version>
-                </dependency>
-            </dependencies>
-        </profile>       
     </profiles>
 </project>
